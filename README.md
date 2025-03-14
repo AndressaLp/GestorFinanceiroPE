@@ -31,8 +31,9 @@ Uma plataforma de gestão simples para pequenas empresas e autônomos organizare
 5. O sistema deve permitir gerenciar os serviços prestados (cadastrar, listar, editar e excluir).
 6. O relatório mensal deve exibir um resumo das atividades, incluindo um gráfico estatístico.
 7. Deve haver uma funcionalidade de busca para localizar clientes e serviços cadastrados.
-8. O usuário poderá filtrar os serviços cadastrados.
-9. O sistema deve permitir que o usuário configure sua conta.
+8. O usuário poderá filtrar os serviços por preço e por ordem de cadastro.
+9. O usuário poderá filtrar os clientes por ordem alfabética e por ordem de cadastro.
+10. O sistema deve permitir que o usuário configure sua conta(editar ou excluir).
 
 ## Requisitos Não Funcionais
 1. O sistema deve ser responsivo e funcionar corretamente em dispositivos móveis e desktops.
