@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Infradb;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repository
 {
@@ -22,6 +23,11 @@ namespace Repository
         public async Task<Usuario?> ObterUsuario(int id)
         {
             return await _context.Usuarios.FindAsync(id);
+        }
+
+        public async Task<Usuario?> ObterUsuarioEmail(string email)
+        {
+            return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email_usuario == email);
         }
 
         public async Task<Usuario?> AtualizarUsuario(int id, Usuario usuarioAtualizado)
