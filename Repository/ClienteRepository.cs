@@ -21,6 +21,7 @@ namespace Repository
         {
             _context.Clientes.Add(cliente);
             await _context.SaveChangesAsync();
+            return cliente;
         }
 
         public async Task<List<Cliente>> ObterClientes()
