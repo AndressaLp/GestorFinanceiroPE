@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { loginUsuario } from "../services/authService";
 import { salvarToken } from "../utils/auth";
 import ButtonComponent from "./ButtonComponent"
@@ -8,12 +9,14 @@ import { useState } from "react"
 function LoginComponent({ onRegisterClick }) {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const navigate = useNavigate();
     const handleLogin = async () => {
         try {
             await loginUsuario({
                 email_usuario: email,
                 senha_usuario: senha
             });
+            navigate("/main/dashboard");
             alert('Login realizado com sucesso!');
         } catch (error) {
             if (error.response && error.response.data && error.response.data.mensagem) {
@@ -26,7 +29,7 @@ function LoginComponent({ onRegisterClick }) {
     }
 
     return (
-        <div className="mx-auto max-lg:w-fit w-2/3 max-lg:text-sm text-lg font-Roboto flex flex-col">
+        <div className="mx-auto max-lg:w-fit w-2/3 max-lg:text-xs max-2xl:text-sm text-lg font-Roboto flex flex-col">
             <h2 className="text-azul max-lg:text-2xl text-3xl font-Poppins">Bem Vindo(a)</h2>
             <p>Entre em sua conta.</p>
             <InputComponent type="email" label="E-mail" placeholder="Digite seu e-mail" name="email" id="email" change={e => setEmail(e.target.value)}/>

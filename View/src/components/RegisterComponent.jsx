@@ -3,8 +3,11 @@ import InputComponent from "./InputComponent"
 import ButtonComponent from "./ButtonComponent"
 import { cadastrarUsuario } from "../services/authService";
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 function RegisterComponent({ onLoginClick }) {
+    const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         nome_usuario: '',
         nome_empresa: '',
@@ -26,6 +29,7 @@ function RegisterComponent({ onLoginClick }) {
         }
         try {
             await cadastrarUsuario(formData);
+            navigate("/main/dashboard");
             alert('Cadastro realizado com sucesso!');
             setFormData({
                 nome_usuario: '',
@@ -40,7 +44,7 @@ function RegisterComponent({ onLoginClick }) {
     };
 
     return(
-        <div className="mx-auto max-lg:w-fit w-4/5 max-lg:text-sm text-lg font-Roboto flex flex-col overflow-auto">
+        <div className="mx-auto max-lg:w-fit w-4/5 max-lg:text-xs max-2xl:text-sm text-lg font-Roboto flex flex-col overflow-auto">
             <h2 className="text-azul max-lg:text-2xl text-3xl font-Poppins">Bem Vindo(a)</h2>
             <p>Registre sua conta.</p>
             <div className="flex flex-row justify-between max-lg:gap-0 gap-8 max-lg:flex-wrap">
