@@ -1,9 +1,7 @@
 ﻿using Domain;
-using Service;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Service.Interfaces;
 
 namespace Controller
 {
@@ -11,9 +9,9 @@ namespace Controller
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly UsuarioService _usuarioService;
+        private readonly IUsuarioService _usuarioService;
 
-        public UsuarioController(UsuarioService usuarioService)
+        public UsuarioController(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }
@@ -41,19 +39,21 @@ namespace Controller
         }
 
         [Authorize]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> ObterUsuario(int id)
+        [HttpGet]
+        public async Task<ActionResult<Usuario>> ObterUsuario()
         {
-            var usuario = await _usuarioService.ObterUsuario(id);
+            var usuarioId = int.Parse(User.FindFirst("id")!.Value);
+            var usuario = await _usuarioService.ObterUsuario(usuarioId);
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }
 
         [Authorize]
-        [HttpPut("{id}")]
-        public async Task<IActionResult> AtualizarUsuario(int id, Usuario usuarioAtualizado)
+        [HttpPut]
+        public async Task<IActionResult> AtualizarUsuario([FromBody] Usuario usuarioAtualizado)
         {
-            var usuario = await _usuarioService.AtualizarUsuario(id, usuarioAtualizado);
+            var usuarioId = int.Parse(User.FindFirst("id")!.Value);
+            var usuario = await _usuarioService.AtualizarUsuario(usuarioId, usuarioAtualizado);
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }

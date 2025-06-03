@@ -1,24 +1,25 @@
 ﻿using Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using Repository;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
+using Repository.Interfaces;
+using Service.Interfaces;
 
 namespace Service
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
-        private readonly UsuarioRepository _usuarioRepository;
-        private readonly PasswordHasher<Usuario> _passwordHasher;
+        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IPasswordHasher<Usuario> _passwordHasher;
         private readonly IConfiguration _configuration;
 
-        public UsuarioService(UsuarioRepository usuarioRepository, IConfiguration configuration)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IConfiguration configuration, IPasswordHasher<Usuario> passwordHasher = null)
         {
             _usuarioRepository = usuarioRepository;
-            _passwordHasher = new PasswordHasher<Usuario>();
+            _passwordHasher = passwordHasher ?? new PasswordHasher<Usuario>();
             _configuration = configuration;
         }
 
@@ -77,8 +78,10 @@ namespace Service
 
             var claims = new[]
             {
+                new Claim("id", usuario.Id_usuario.ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.Id_usuario.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, usuario.Email_usuario),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
             var token = new JwtSecurityToken(

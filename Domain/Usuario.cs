@@ -30,5 +30,6 @@ namespace Domain
         public required string Senha_usuario { get; set; }
 
         public ICollection<Cliente>? Clientes { get; set; }
+        public ICollection<Servico>? Servicos { get; set; }
     }
 }
