@@ -13,6 +13,10 @@ namespace Infradb
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Servico>().HasOne(s => s.Cliente).WithMany(c => c.Servicos).HasForeignKey(s => s.Id_cliente);
+            modelBuilder.Entity<Cliente>().HasOne(c => c.Usuario).WithMany(u => u.Clientes).HasForeignKey(c => c.Id_usuario);
+            modelBuilder.Entity<Servico>().HasOne(s => s.Usuario).WithMany(u => u.Servicos).HasForeignKey(s => s.Id_usuario);
         }
     }
 }

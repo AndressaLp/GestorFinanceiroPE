@@ -3,10 +3,11 @@ using Infradb;
 using Service;
 using Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Repository.Interfaces;
+using Service.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +21,20 @@ builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<ClienteRepository>();
 builder.Services.AddScoped<ClienteService>();
+builder.Services.AddScoped<ServicoRepository>();
+builder.Services.AddScoped<ServicoService>();
+
+builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
+builder.Services.AddScoped<IServicoService, ServicoService>();
+builder.Services.AddScoped<IClienteService, ClienteService>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddControllers().AddApplicationPart(typeof(UsuarioController).Assembly);
+builder.Services.AddControllers().AddApplicationPart(typeof(ClienteController).Assembly);
+builder.Services.AddControllers().AddApplicationPart(typeof(ServicoController).Assembly);
 
 var jwtKey = builder.Configuration["Jwt:Key"];
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
