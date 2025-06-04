@@ -1,18 +1,15 @@
 ﻿using Domain;
 using Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Repository.Interfaces;
+using Service.Interfaces;
 
 namespace Service
 {
-    public class ClienteService
+    public class ClienteService : IClienteService
     {
-        private readonly ClienteRepository _clienteRepository;
+        private readonly IClienteRepository _clienteRepository;
 
-        public ClienteService(ClienteRepository clienteRepository)
+        public ClienteService(IClienteRepository clienteRepository)
         {
             _clienteRepository = clienteRepository;
         }
@@ -22,9 +19,9 @@ namespace Service
             return await _clienteRepository.CriarCliente(cliente);
         }
 
-        public async Task<List<Cliente>> ObterClientes()
+        public async Task<List<Cliente>> ObterClientes(int usuarioId)
         {
-            return await _clienteRepository.ObterClientes();
+            return await _clienteRepository.ObterClientes(usuarioId);
         }
 
         public async Task<Cliente?> ObterClienteId(int id)
@@ -37,9 +34,9 @@ namespace Service
             return await _clienteRepository.AtualizarCliente(id, clienteAtualizado);
         }
 
-        public async Task<bool> DeletarCliente(int id)
+        public async Task<bool> DeletarCliente(int id, int usuarioId)
         {
-            return await _clienteRepository.DeletarCliente(id);
+            return await _clienteRepository.DeletarCliente(id, usuarioId);
         }
     }
 }
