@@ -25,3 +25,7 @@
 .swiper-button-prev, .swiper-button-next{
     color: var(--color-branco) !important;
 }
+
+input ::-webkit-search-decoration, ::-webkit-search-cancel-button{
+    display: none;
+}
