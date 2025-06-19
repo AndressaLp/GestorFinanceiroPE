@@ -49,17 +49,16 @@ function RegisterComponent({ onLoginClick }) {
             <p>Registre sua conta.</p>
             <div className="flex flex-row justify-between max-lg:gap-0 gap-8 max-lg:flex-wrap">
                 <div className="flex flex-col w-full">
-                    <InputComponent type="text" label="Nome Completo" placeholder="Digite seu nome" name="nome_usuario" id="name" change={handleChange}/>
-                    <InputComponent type="text" label="Nome da Empresa" placeholder="Digite o nome da empresa" name="nome_empresa" id="empresa" change={handleChange}/>
-                    <InputComponent type="text" label="Profissão/Área" placeholder="Digite sua profissão ou área" name="area_profissional" id="profissao" change={handleChange}/>
+                    <InputComponent type="text" label="Nome Completo" placeholder="Digite seu nome" name="nome_usuario" id="nome_usuario" change={handleChange}/>
+                    <InputComponent type="text" label="Nome da Empresa" placeholder="Digite o nome da empresa" name="nome_empresa" id="nome_empresa" change={handleChange}/>
+                    <InputComponent type="text" label="Profissão/Área" placeholder="Digite sua profissão ou área" name="area_profissional" id="area_profissional" change={handleChange}/>
                 </div>
                 <div className="flex flex-col w-full">
-                    <InputComponent type="email" label="E-mail" placeholder="Digite seu e-mail" name="email_usuario" id="email" change={handleChange}/>
-                    <InputComponent type="password" label="Senha" placeholder="Digite sua senha" name="senha_usuario" id="password" change={handleChange}/>
-                    <InputComponent type="password" label="Confirmar Senha" placeholder="Confirme sua senha" id="confirmarSenha" change={e => setConfirmarSenha(e.target.value)}/>
+                    <InputComponent type="email" label="E-mail" placeholder="Digite seu e-mail" name="email_usuario" id="email_usuario" change={handleChange}/>
+                    <InputComponent type="password" label="Senha" placeholder="Digite sua senha" name="senha_usuario" id="senha_usuario" change={handleChange}/>
+                    <InputComponent type="password" label="Confirmar Senha" placeholder="Confirme sua senha" name="confirmarSenha" id="confirmarSenha" change={e => setConfirmarSenha(e.target.value)}/>
                 </div>
             </div>
-            <InputComponent type="checkbox" label="Não tenho uma empresa" name="sem-empresa" id="sem-empresa"/>
             <ButtonComponent text="CRIAR CONTA" action={handleRegister}/>
             <p className="flex justify-center max-lg:text-xs text-sm mt-10">Já tem uma conta?<LinkBtnComponent text="Clique aqui!" action={onLoginClick}/></p>
         </div>

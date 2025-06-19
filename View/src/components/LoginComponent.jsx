@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUsuario } from "../services/authService";
 import { salvarToken } from "../utils/auth";
 import ButtonComponent from "./ButtonComponent"
@@ -34,7 +34,9 @@ function LoginComponent({ onRegisterClick }) {
             <p>Entre em sua conta.</p>
             <InputComponent type="email" label="E-mail" placeholder="Digite seu e-mail" name="email" id="email" change={e => setEmail(e.target.value)}/>
             <InputComponent type="password" label="Senha" placeholder="Digite sua senha" name="password" id="password" change={e => setSenha(e.target.value)}/>
-            <LinkBtnComponent text="Esqueceu sua senha?" action={() => {}}/>
+            <Link to="/recover" className="self-end">
+                <LinkBtnComponent text="Esqueceu sua senha?" action={() => {}}/>
+            </Link>
             <ButtonComponent text="ENTRAR" action={handleLogin}/>
             <p className="flex justify-center max-lg:text-xs text-sm mt-10">Não tem uma conta ainda?<LinkBtnComponent text="Cadastre-se aqui!" action={onRegisterClick}/></p>
         </div>
