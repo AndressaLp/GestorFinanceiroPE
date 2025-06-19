@@ -28,6 +28,7 @@ namespace Domain
         [Required(ErrorMessage = "A senha é obrigatória.")]
         [MinLength(8, ErrorMessage = "A senha deve ter pelo menos 8 caracteres.")]
         public required string Senha_usuario { get; set; }
+        public string? Foto_perfil { get; set; }
 
         public ICollection<Cliente>? Clientes { get; set; }
         public ICollection<Servico>? Servicos { get; set; }
