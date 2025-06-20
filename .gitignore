@@ -1,0 +1,13 @@
+bin/
+obj/
+*.db
+*.sqlite
+*.mdf
+*.log
+.env
+
+
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
