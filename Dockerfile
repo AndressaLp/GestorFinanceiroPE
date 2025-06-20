@@ -5,7 +5,7 @@ WORKDIR /app
 # Copiar tudo
 COPY . .
 
-# Restaurar dependências
+# Restaurar dependÃªncias
 RUN dotnet restore ./GestorServicos.sln
 
 # Build em modo Release
@@ -21,8 +21,8 @@ WORKDIR /app
 # Copiar os arquivos publicados da etapa de build
 COPY --from=build /app/publish .
 
-# Expor a porta da aplicação (ajuste se necessário)
+# Expor a porta da aplicaÃ§Ã£o (ajuste se necessÃ¡rio)
 EXPOSE 8080
 
-# Definir o comando de inicialização
+# Definir o comando de inicializaÃ§Ã£o
 ENTRYPOINT ["dotnet", "GestorServicos.dll"]
