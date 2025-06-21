@@ -50,7 +50,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    options.RequireHttpsMetadata = false; //lembrar: true em produção
+    options.RequireHttpsMetadata = false; //lembrar: true em produÃ§Ã£o
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -66,9 +66,9 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(policy =>
+    options.AddPolicy("CorsPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins("https://gestor-financeiro-pe.vercel.app")
         .AllowAnyHeader()
         .AllowAnyMethod();
     });
@@ -89,7 +89,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
-app.UseCors();
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 
