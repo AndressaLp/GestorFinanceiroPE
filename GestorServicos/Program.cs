@@ -31,10 +31,10 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-builder.Services.AddControllers();
-builder.Services.AddControllers().AddApplicationPart(typeof(UsuarioController).Assembly);
-builder.Services.AddControllers().AddApplicationPart(typeof(ClienteController).Assembly);
-builder.Services.AddControllers().AddApplicationPart(typeof(ServicoController).Assembly);
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(UsuarioController).Assembly)
+    .AddApplicationPart(typeof(ClienteController).Assembly)
+    .AddApplicationPart(typeof(ServicoController).Assembly);
 
 var jwtKey = builder.Configuration["Jwt:Key"];
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
@@ -91,7 +91,7 @@ app.UseStaticFiles();
 
 app.UseCors("CorsPolicy");
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
