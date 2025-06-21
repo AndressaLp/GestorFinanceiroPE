@@ -26,7 +26,7 @@ function SideBarComponent({display, closeMenu}) {
                     const response = await obterUsuarioLogado();
                     setUsuario(response);
                     if(response.foto_perfil){
-                        setFotoPerfilUrl(`${import.meta.env.VITE_API_URL || ''}${response.foto_perfil}`);
+                        setFotoPerfilUrl(response.foto_perfil);
                     } else{
                         setFotoPerfilUrl("/person-icon.svg");
                     }

@@ -48,7 +48,7 @@ function ConfigPage() {
                 const response = await obterUsuarioLogado();
                 setUsuario(response);
                 if(response.foto_perfil){
-                    setFotoPerfilUrl(`${import.meta.env.VITE_API_URL || ''}${response.foto_perfil}`);
+                    setFotoPerfilUrl(response.foto_perfil);
                 } else{
                     setFotoPerfilUrl("/person-icon.svg");
                 }
@@ -105,15 +105,13 @@ function ConfigPage() {
 
             try {
                 const response = await uploadFotoPerfil(formData);
-                setFotoPerfilUrl(`${import.meta.env.VITE_API_URL || ''}${response.url}`);
+                setFotoPerfilUrl(response.url);
                 setUsuario(prevUsuario => ({...prevUsuario, foto_perfil: response.url}));
                 alert("Imagem alterada com sucesso!");
             } catch (error) {
                 console.log(error);
                 alert("Erro ao alterar a imagem");
-                setFotoPerfilUrl(usuario?.foto_perfil ?
-                `${import.meta.env.VITE_API_URL || ''}${usuario.foto_perfil}` :
-                "/person-icon.svg");
+                setFotoPerfilUrl(usuario?.foto_perfil ? usuario.foto_perfil : "/person-icon.svg");
             }
         }
     }
