@@ -12,6 +12,8 @@ using System.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 
 namespace Service
 {
@@ -22,13 +24,15 @@ namespace Service
         private readonly IConfiguration _configuration;
         private static Dictionary<string, (string Codigo, DateTime ExpiraEm)> _codigos = new();
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly Cloudinary _cloudinary;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, IConfiguration configuration, IWebHostEnvironment webHostEnvironment, IPasswordHasher<Usuario> passwordHasher = null)
+        public UsuarioService(IUsuarioRepository usuarioRepository, CloudinaryService cloudinaryService, IConfiguration configuration, IWebHostEnvironment webHostEnvironment, IPasswordHasher<Usuario> passwordHasher = null)
         {
             _usuarioRepository = usuarioRepository;
             _passwordHasher = passwordHasher ?? new PasswordHasher<Usuario>();
             _configuration = configuration;
             _webHostEnvironment = webHostEnvironment;
+            _cloudinary = cloudinaryService.GetCloudinary();
         }
 
         public async Task<Usuario> CriarUsuario(Usuario usuario)
@@ -131,9 +135,27 @@ namespace Service
             return verificacao == PasswordVerificationResult.Success;
         }
 
+        private string? ObterPublicIdDaUrl(string url)
+        {
+            try
+            {
+                var uri = new Uri(url);
+                var partes = uri.AbsolutePath.Split('/');
+
+                var pasta = partes[partes.Length - 2]; // "perfil"
+                var arquivo = Path.GetFileNameWithoutExtension(partes.Last());
+
+                return $"{pasta}/{arquivo}";
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public async Task<string?> SalvarFotoPerfil(int id, IFormFile fotoPerfil)
         {
-            if(fotoPerfil.Length > 2 * 1024 * 1024)
+            if (fotoPerfil.Length > 2 * 1024 * 1024)
             {
                 throw new Exception("O tamanho da imagem excede o limite permitido (2MB).");
             }
@@ -143,52 +165,48 @@ namespace Service
             {
                 throw new Exception("Formato de imagem não permitido. Use JPG, JPEG, PNG ou GIF.");
             }
-            var nomeUnicoArquivo = $"{Guid.NewGuid()}{extensao}";
-
-            var pastaUploads = Path.Combine(_webHostEnvironment.WebRootPath, "uploads", "perfil");
-
-            if (!Directory.Exists(pastaUploads))
-            {
-                Directory.CreateDirectory(pastaUploads);
-            }
-
-            var caminhoCompletoArquivo = Path.Combine(pastaUploads, nomeUnicoArquivo);
-
-            using (var stream = new FileStream(caminhoCompletoArquivo, FileMode.Create))
-            {
-                await fotoPerfil.CopyToAsync(stream);
-            }
-
-            string urlPublicaFoto = $"/uploads/perfil/{nomeUnicoArquivo}";
-
             var usuario = await _usuarioRepository.ObterUsuario(id);
             if (usuario == null)
-            {
-                System.IO.File.Delete(caminhoCompletoArquivo);
-                return null;
-            }
+                throw new Exception("Usuário não encontrado.");
 
             if (!string.IsNullOrEmpty(usuario.Foto_perfil))
             {
-                var caminhoFotoAntiga = Path.Combine(_webHostEnvironment.WebRootPath, usuario.Foto_perfil.TrimStart('/'));
-                if (System.IO.File.Exists(caminhoFotoAntiga))
+                try
                 {
-                    try
+                    var publicId = ObterPublicIdDaUrl(usuario.Foto_perfil);
+                    if (!string.IsNullOrEmpty(publicId))
                     {
-                        System.IO.File.Delete(caminhoFotoAntiga);
-                    }
-                    catch (Exception ex) 
-                    {
-                        Console.WriteLine($"Erro ao deletar a foto antiga: {ex.Message}");
+                        await _cloudinary.DestroyAsync(new DeletionParams(publicId));
                     }
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro ao deletar foto antiga: {ex.Message}");
+                }
             }
-
-            usuario.Foto_perfil = urlPublicaFoto;
-
+            var urlFoto = await UploadFotoPerfil(fotoPerfil);
+            usuario.Foto_perfil = urlFoto;
             await _usuarioRepository.AtualizarUsuario(usuario.Id_usuario, usuario);
 
-            return urlPublicaFoto;
+            return urlFoto;
+        }
+
+        private async Task<string> UploadFotoPerfil(IFormFile fotoPerfil)
+        { 
+            using var stream = fotoPerfil.OpenReadStream();
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(fotoPerfil.FileName, stream),
+                Folder = "perfil",
+                Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
+            };
+
+            var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+            if (uploadResult.StatusCode != System.Net.HttpStatusCode.OK)
+                throw new Exception("Erro ao fazer upload da imagem.");
+
+            return uploadResult.SecureUrl.ToString();
         }
 
         public async Task<bool> DeletarUsuario(int id)

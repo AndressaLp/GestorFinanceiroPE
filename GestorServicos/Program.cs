@@ -25,6 +25,8 @@ builder.Services.AddScoped<ClienteService>();
 builder.Services.AddScoped<ServicoRepository>();
 builder.Services.AddScoped<ServicoService>();
 
+builder.Services.AddSingleton<CloudinaryService>();
+
 builder.Services.AddScoped<IServicoRepository, ServicoRepository>();
 builder.Services.AddScoped<IServicoService, ServicoService>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
