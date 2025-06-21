@@ -17,7 +17,7 @@ function ConfigPage() {
     const [editUserModal, setEditUserModal] = useState(null);
     const [deleteUserModal, setDeleteUserModal] = useState(null);
     const [newPasswordModal, setNewPasswordModal] = useState(null);
-    const [fotoPerfilUrl, setFotoPerfilUrl] = useState("../public/person-icon.svg");
+    const [fotoPerfilUrl, setFotoPerfilUrl] = useState("/person-icon.svg");
 
     const fileInputRef = useRef(null);
     const openEditModal = () => setEditUserModal(true);
@@ -50,7 +50,7 @@ function ConfigPage() {
                 if(response.foto_perfil){
                     setFotoPerfilUrl(`${import.meta.env.VITE_API_URL || ''}${response.foto_perfil}`);
                 } else{
-                    setFotoPerfilUrl("../public/person-icon.svg");
+                    setFotoPerfilUrl("/person-icon.svg");
                 }
             } catch (error) {
                 alert("Erro ao carregar o usuário: " + error.response.data.message);
@@ -113,7 +113,7 @@ function ConfigPage() {
                 alert("Erro ao alterar a imagem");
                 setFotoPerfilUrl(usuario?.foto_perfil ?
                 `${import.meta.env.VITE_API_URL || ''}${usuario.foto_perfil}` :
-                "../public/person-icon.svg");
+                "/person-icon.svg");
             }
         }
     }

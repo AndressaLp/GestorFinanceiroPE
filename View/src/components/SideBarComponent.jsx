@@ -18,7 +18,7 @@ function SideBarComponent({display, closeMenu}) {
             area_profissional: "",
             foto_perfil: ""
         });
-    const [fotoPerfilUrl, setFotoPerfilUrl] = useState("../public/person-icon.svg");
+    const [fotoPerfilUrl, setFotoPerfilUrl] = useState("/person-icon.svg");
     
         useEffect(() => {
             const carregarUsuario = async () => {
@@ -28,11 +28,11 @@ function SideBarComponent({display, closeMenu}) {
                     if(response.foto_perfil){
                         setFotoPerfilUrl(`${import.meta.env.VITE_API_URL || ''}${response.foto_perfil}`);
                     } else{
-                        setFotoPerfilUrl("../public/person-icon.svg");
+                        setFotoPerfilUrl("/person-icon.svg");
                     }
                 } catch (error) {
                     alert("Erro ao carregar o usuário: " + error.response.data.message);
-                    setFotoPerfilUrl("../public/person-icon.svg");
+                    setFotoPerfilUrl("/person-icon.svg");
                 }
             }
             carregarUsuario();
