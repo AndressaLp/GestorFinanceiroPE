@@ -71,7 +71,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", policy =>
     {
-        policy.WithOrigins("https://gestor-financeiro-pe.vercel.app")
+        policy.WithOrigins("https://gestor-financeiro-pe.vercel.app", "http://localhost:5173")
         .AllowAnyHeader()
         .AllowAnyMethod();
     });
