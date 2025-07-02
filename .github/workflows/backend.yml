@@ -28,16 +28,16 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Run tests with coverage
-        run: dotnet test --configuration Release --no-build --collect:"XPlat Code Coverage"
+        run: dotnet test ./GestorFinanceiroPE/Tests/Tests.csproj --configuration Release --no-build --collect:"XPlat Code Coverage"
 
-      - name: Convert coverage to lcov (para usar em relatórios de cobertura)
+      - name: Generate coverage report
         uses: danielpalme/ReportGenerator-GitHub-Action@5.1.26
         with:
           reports: '**/coverage.cobertura.xml'
           targetdir: 'coveragereport'
           reporttypes: 'HtmlInline_AzurePipelines;Cobertura;lcov'
 
-      - name: Upload coverage report as artifact
+      - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: backend-coverage-report
