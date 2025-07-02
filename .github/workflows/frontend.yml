@@ -36,7 +36,7 @@ jobs:
           npm run test -- --coverage
 
       - name: Upload coverage report as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: frontend-coverage-report
           path: View/coverage
