@@ -51,7 +51,7 @@ function NewServices() {
                     <option key={cliente.id_cliente} value={cliente.id_cliente}>{cliente.nome_cliente}</option>
                 ))}
             </SelectComponent>
-            <div className="grid grid-cols-2 gap-40">
+            <div className="grid grid-cols-2 min-lg:gap-15 max-md:gap-5 md:gap-10">
                 <InputComponent type="date" label="Data do Serviço" placeholder="Digite a data do serviço" name="data_servico" id="data_servico" change={handleChange}/>
                 <InputComponent type="text" label="Valor do Serviço" placeholder="Digite o valor do serviço" name="valor_servico" id="valor_servico" change={handleChange}/>
             </div>

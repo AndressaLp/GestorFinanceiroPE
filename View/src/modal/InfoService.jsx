@@ -55,7 +55,7 @@ function InfoService({ serviceId }){
                 <p>Data: {servico.data_servico ? new Date(servico.data_servico).toLocaleDateString() : ''}</p>
                 <p>Valor: {servico.valor_servico ? servico.valor_servico.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : ''}</p>
             </div>
-            <div className="flex gap-25">
+            <div className="flex gap-25 max-md:gap-10">
                 <ButtonComponent text="EXCLUIR" icon={<RiDeleteBin6Fill/>} action={openDeleteModal}/>
                 <ButtonComponent text="EDITAR" icon={<FaEdit/>} action={openEditModal}/>
             </div>

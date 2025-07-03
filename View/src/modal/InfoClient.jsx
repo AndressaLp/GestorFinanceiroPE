@@ -60,7 +60,7 @@ function InfoClient({ clientId }){
                 <p>Cidade: {cliente.cidade}</p>
                 <p>Estado: {cliente.estado}</p>
             </div>
-            <div className="flex gap-25">
+            <div className="flex gap-25 max-md:gap-10">
                 <ButtonComponent text="EXCLUIR" icon={<RiDeleteBin6Fill/>} action={openDeleteModal}/>
                 <ButtonComponent text="EDITAR" icon={<FaEdit/>} action={openEditModal}/>
             </div>

@@ -39,7 +39,7 @@ function EditUser(){
     }
 
     return (
-        <div className="max-lg:w-90 w-lg">
+        <div className="md:w-90 max-w-lg max-md:w-full">
             <InputComponent type="text" label="Nome Completo" name="nome_usuario" id="name" change={handleChange} value={usuario.nome_usuario}/>
             <InputComponent type="text" label="Nome da Empresa" name="nome_empresa" id="empresa" change={handleChange} value={usuario.nome_empresa}/>
             <InputComponent type="text" label="Profissão/Área" name="area_profissional" id="profissao" change={handleChange} value={usuario.area_profissional}/>

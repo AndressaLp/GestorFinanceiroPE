@@ -111,11 +111,10 @@ function ServicesPage(){
 
     return(
         <div className="max-lg:text-xs max-2xl:text-sm text-lg font-Roboto text-azul-escuro">
-            <div className="grid grid-cols-[1fr_3fr_1.7fr] gap-45 items-center mb-10">
-                {/* <ButtonComponent icon={<IoFilter className="w-6 h-6"/>} text="FILTRAR" action={() => {}}/> */}
+            <div className="grid grid-cols-[1fr_3fr_1.7fr] max-md:grid-cols-[1fr_3fr] md:gap-10 gap-45 max-md:gap-5 items-center mb-10">
                 <SelectComponent name="filtro" id="filtro" change={(e) => setOrdenacao(e.target.value)} value={ordenacao} type="filtro">
-                    <option value="maisRecente">Mais Recentes</option>
-                    <option value="maisAntigo">Mais Antigos</option>
+                    <option value="maisRecente">Mais Recente</option>
+                    <option value="maisAntigo">Mais Antigo</option>
                     <option value="menorValor">Menor Valor</option>
                     <option value="maiorValor">Maior Valor</option>
                 </SelectComponent>

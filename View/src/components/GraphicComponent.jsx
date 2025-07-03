@@ -53,7 +53,7 @@ function GraphicComponent(){
     }, [clientes, servicos]);
 
     return(
-        <div className="bg-branco rounded-xl p-10 shadow-[10px_10px_15px_rgba(0,0,0,0.25)]">
+        <div className="bg-branco rounded-xl p-10 max-md:p-5 shadow-[10px_10px_15px_rgba(0,0,0,0.25)]">
             <h2 className="text-azul max-lg:text-2xl text-3xl font-Poppins mb-5">Resumo Anual</h2>
             <ResponsiveContainer width="100%" height={400}>
                 <BarChart data={dadosMensais}

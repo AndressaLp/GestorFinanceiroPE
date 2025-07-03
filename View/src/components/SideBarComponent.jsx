@@ -44,7 +44,7 @@ function SideBarComponent({display, closeMenu}) {
         const isMobile = window.innerWidth < 1024;
 
     return (
-        <div className={`${display} max-md:w-52 w-1/5 h-screen bg-azul flex flex-col text-branco max-md:p-2 p-5 font-Roboto max-lg:text-xs max-2xl:text-sm text-lg max-lg:fixed max-lg:z-40 max-lg:shadow-[10px_0px_15px_rgba(0,0,0,0.50)]`}>
+        <div className={`${display} max-md:w-52 md:w-56 min-lg:w-1/5 h-screen bg-azul flex flex-col text-branco max-md:p-2 p-5 font-Roboto max-lg:text-xs max-2xl:text-sm text-lg max-lg:fixed max-lg:z-40 max-lg:shadow-[10px_0px_15px_rgba(0,0,0,0.50)]`}>
             <div className="flex flex-col items-center justify-center text-center h-1/3">
                 <PerfilComponent src={fotoPerfilUrl}/>
                 <h2 className="font-Poppins max-lg:text-xl text-2xl">{usuario.nome_empresa ? usuario.nome_empresa : usuario.nome_usuario}</h2>
