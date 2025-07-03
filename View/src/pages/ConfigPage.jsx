@@ -120,26 +120,26 @@ function ConfigPage() {
 
     return (
         <div className="max-lg:text-xs max-2xl:text-sm text-lg font-Roboto text-azul-escuro">
-            <FrameComponent height="min-h-[calc(100vh-180px)] h-auto">
+            <FrameComponent height=" h-auto">
                 <h2 className="text-azul max-lg:text-2xl text-3xl font-Poppins">Minha Conta</h2>
-                <div className="flex flex-row justify-center">
-                    <div className="w-1/3 flex flex-col items-center mt-10">
+                <div className="flex flex-row justify-center max-lg:flex-col max-lg:items-center gap-10">
+                    <div className="w-1/3 max-lg:w-fit flex flex-col items-center mt-10">
                         <PerfilComponent src={fotoPerfilUrl}/>
                         <div className="mt-3">
                             <input className="hidden" type="file" accept="image/*" ref={fileInputRef} onChange={handleFileChange}/>  
                             <ButtonComponent text="ALTERAR IMAGEM" action={handleAlterarImagem} icon={<RiImageAddLine className="w-6 h-6"/>}/>
                         </div>
-                        <div className="max-lg:text-xs text-sm mb-0 mt-auto flex gap-0.5">
+                        <div className="max-lg:text-xs text-sm mb-0 mt-auto flex gap-0.5 max-lg:mt-10">
                             <p>Deseja alterar sua senha?</p>
                             <LinkBtnComponent text="Clique aqui!" action={openNewPasswordModal}/>
                         </div>
                     </div>
-                    <div className="w-2/3 flex flex-col">
+                    <div className="w-2/3 max-md:w-full max-w-2xl flex flex-col">
                         <InputComponent type="text" label="Nome Completo" name="nome_usuario" id="name" value={usuario.nome_usuario} disabled={true}/>
                         <InputComponent type="text" label="Nome da Empresa" name="nome_empresa" id="empresa" value={usuario.nome_empresa} disabled={true}/>
                         <InputComponent type="text" label="Profissão/Área" name="area_profissional" id="profissao" value={usuario.area_profissional} disabled={true}/>
                         <InputComponent type="email" label="Email" name="email_usuario" id="email" value={usuario.email_usuario} disabled={true}/>
-                        <div className="grid grid-cols-2 gap-90 items-center mt-10">
+                        <div className="grid grid-cols-2 gap-90 items-center mt-10 max-md:gap-10 md:gap-10">
                             <ButtonComponent icon={<RiDeleteBin6Fill className="w-6 h-6"/>} text="EXCLUIR" action={openDeleteModal}/>
                             <ButtonComponent icon={<FaEdit className="w-6 h-6"/>} text="EDITAR" action={openEditModal}/>
                         </div>

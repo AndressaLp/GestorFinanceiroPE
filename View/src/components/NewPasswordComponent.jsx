@@ -5,7 +5,7 @@ import ButtonComponent from "./ButtonComponent"
 
 function NewPasswordComponent({confirmarNovaSenha, handleChangeSenha, senhaData, type, senhaAtualData, handleChangeSenhaAtual}) {
     return (
-        <div className="w-100 max-md:w-60">
+        <div className="w-100 max-md:w-full">
             {type === "modalPassword" ? <h2>{null}</h2> : (
                 <>
                     <h2 className="text-azul max-lg:text-2xl text-3xl font-Poppins">Redefinir Senha</h2>

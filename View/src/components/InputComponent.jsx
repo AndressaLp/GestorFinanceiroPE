@@ -9,7 +9,7 @@ function InputComponent({type, label, placeholder, name, id, change, value, disa
                     <HiSearch className="w-6 h-6 right-0 me-1 text-azul absolute z-0"/>
                 </div>  
             ) : (
-                <div className="flex flex-col gap-1.5 mt-10 mb-0.5">
+                <div className="flex flex-col gap-1.5 mt-10 max-lg:mt-5 mb-0.5">
                     <label htmlFor={name} className="text-azul-escuro block">{label}</label>
                     <input className="border-2 border-azul focus:outline-verde rounded-xl max-lg:rounded-xs w-full max-lg:h-6 h-8 p-1 text-azul-escuro" type={type} name={name} id={id} placeholder={placeholder} onChange={change} value={value} disabled={disabled}/>
                 </div>

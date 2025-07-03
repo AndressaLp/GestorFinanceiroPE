@@ -6,7 +6,7 @@ function SelectComponent({ name, id, children, label, change, value, type }) {
                     {children}
                 </select>
             ) : <> 
-                <label htmlFor={name} className="text-azul-escuro block mt-10 mb-1.5">{label}</label>
+                <label htmlFor={name} className="text-azul-escuro block mt-10 max-md:mt-5 mb-1.5">{label}</label>
                 <select name={name} id={id} onChange={change} value={value} className="border-2 border-azul focus:outline-verde rounded-xl max-lg:rounded-xs w-full max-lg:h-6 h-8 p-1 text-azul-escuro">
                     {children}
                 </select>

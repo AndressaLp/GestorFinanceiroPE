@@ -18,7 +18,7 @@ function MessageComponent({type, message, title, textbtn, action, textbtn2, acti
 
     return(
         <div className="fixed top-0 left-0 bg-[rgba(0,0,0,0.7)] w-[100%] h-[100%] z-20 flex items-center justify-center">
-            <div className="flex flex-col max-w-md min-w-sm min-h-auto h-auto bg-branco p-10 font-Roboto max-lg:text-xs max-2xl:text-sm text-lg rounded-xl shadow-[10px_10px_15px_rgba(0,0,0,0.25)] text-azul-escuro">
+            <div className="flex flex-col max-w-md min-w-xs min-h-auto h-auto bg-branco p-10 max-md:p-5 font-Roboto max-lg:text-xs max-2xl:text-sm text-lg rounded-xl shadow-[10px_10px_15px_rgba(0,0,0,0.25)] text-azul-escuro">
                 {type == "success" ? 
                     <div className="flex flex-col items-center m-auto gap-5 text-center">
                         <FaRegCheckCircle className="w-20 h-20 m-auto text-verde"/>
